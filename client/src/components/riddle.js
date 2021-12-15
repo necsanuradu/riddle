@@ -28,6 +28,7 @@ export default class Riddle extends Component {
     this.sourceComponentLoader = this.sourceComponentLoader.bind(this);
     this.riddleComponentLoader = this.riddleComponentLoader.bind(this);
     this.setComponentAsString = this.setComponentAsString.bind(this);
+    this.updateRenderedRiddle = this.updateRenderedRiddle.bind(this);
     this.defaultRenderForNewComponent =
       this.defaultRenderForNewComponent.bind(this);
     this.getRegexComponents(this.props.riddleContent, this);
@@ -35,6 +36,15 @@ export default class Riddle extends Component {
 
   setRenderedState(newState) {
     this.setState({ renderedState: newState });
+  }
+
+  updateRenderedRiddle(findStringComponent, replaceWithComponent) {
+    let renderedState = this.state.renderedState;
+    renderedState = renderedState.replace(
+      findStringComponent,
+      replaceWithComponent
+    );
+    this.setRenderedState(renderedState);
   }
 
   defaultRenderForNewComponent(source) {
@@ -66,12 +76,10 @@ export default class Riddle extends Component {
       },
       (err) => {
         this.saveNewComponent(component);
-        let renderedState = this.state.renderedState;
-        renderedState = renderedState.replace(
+        this.updateRenderedRiddle(
           component.all,
           this.defaultRenderForNewComponent(component.name)
         );
-        this.setRenderedState(renderedState);
       }
     );
   }
@@ -79,12 +87,10 @@ export default class Riddle extends Component {
   riddleComponentLoader(component, sourceComponent) {
     return import(`../${component.path}`).then(
       (result) => {
-        let renderedState = this.state.renderedState;
-        renderedState = renderedState.replace(
+        this.updateRenderedRiddle(
           component.all,
           renderToString(<result.default />)
         );
-        this.setRenderedState(renderedState);
         return result;
       },
       (err) => {
@@ -115,12 +121,7 @@ export default class Riddle extends Component {
     // this is where we WILL implement the component.instructions
     // this is where we WILL implement the component.instructions
     // this is where we WILL implement the component.instructions
-    let renderedState = this.state.renderedState;
-    renderedState = renderedState.replace(
-      component.all,
-      renderToString(sourceComponent)
-    );
-    this.setRenderedState(renderedState);
+    this.updateRenderedRiddle(component.all, renderToString(sourceComponent));
     component.content = sourceComponent;
     // this is where we WILL implement the component.instructions
     // this is where we WILL implement the component.instructions

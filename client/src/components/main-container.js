@@ -8,7 +8,7 @@ class MainComponent extends Component {
     <div class="bg-success container pt-1 mt-3" >
     <RiddleTest import(.../pre-components/demofile1) />
     ...text in-between
-    <NoodleTest import(.../pre-components/demofile233) />
+    <NoodleTest import(.../pre-components/demofile25) />
     ...text after
     </div>
   `;
