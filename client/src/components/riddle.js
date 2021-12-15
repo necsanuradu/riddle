@@ -24,13 +24,6 @@ export default class Riddle extends Component {
       renderedState: this.props.riddleContent,
     };
 
-    this.getRegexComponents = this.getRegexComponents.bind(this);
-    this.sourceComponentLoader = this.sourceComponentLoader.bind(this);
-    this.riddleComponentLoader = this.riddleComponentLoader.bind(this);
-    this.setComponentAsString = this.setComponentAsString.bind(this);
-    this.updateRenderedRiddle = this.updateRenderedRiddle.bind(this);
-    this.defaultRenderForNewComponent =
-      this.defaultRenderForNewComponent.bind(this);
     this.getRegexComponents(this.props.riddleContent, this);
   }
 
