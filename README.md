@@ -1,10 +1,10 @@
 ### How to use this repo
 
 #### Inside the root directory in the terminal Run:
-npm install
+npm install<br />
 npm start
 #### Then navigate to the client directory and Run again:
-npm install
+npm install<br />
 npm start
 
 ### The riddle Component can be found inside:
